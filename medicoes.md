@@ -7,6 +7,11 @@ Empresas1 — 4.494.860 — 13,4s (loop inline) → 16,6s (generator) — +23%, 
 
 commit por linha:   ~3.500 linhas/s  →  projeção de ~2h20min
 commit por lote:    72.700 linhas/s  →  6min40s real
+commit por lote + executemany:  336,3s → 86,4 mil l/s   (-16%)
+
+                   sem índice    com índice    ganho
+comum  (20,3 mi)     22,023s       1,403s       15,7x
+raro   (278 mil)      4,161s       0,016s      260,0x
 
 [linux] Empresas0 — 29.069.564 linhas
   dict:                25,96s

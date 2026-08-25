@@ -16,28 +16,30 @@ if __name__ == "__main__":
 
     inicio = time.perf_counter()
 
+    LOTE = 10_000
+    lote = []
     total = 0
     for empresa in ler_empresas(caminho_csv):
-        cursor.execute(
-            "INSERT INTO empresa VALUES (?, ?, ?, ?, ?, ?, ?)",
-            (
-                empresa.cnpj_basico,
-                empresa.razao_social,
-                empresa.natureza_juridica,
-                empresa.qualificacao_responsavel,
-                str(empresa.capital_social),
-                empresa.porte,
-                empresa.ente_federativo,
-            ),
-        )
+        lote.append((
+            empresa.cnpj_basico,
+            empresa.razao_social,
+            empresa.natureza_juridica,
+            empresa.qualificacao_responsavel,
+            str(empresa.capital_social),
+            empresa.porte,
+            empresa.ente_federativo,
+        ))
         total += 1
 
-        if total % 10000 == 0:
+        if len(lote) >= LOTE:
+            cursor.executemany("INSERT INTO empresa VALUES (?, ?, ?, ?, ?, ?, ?)", lote)
             conexao.commit()
-            print(total)
+            lote.clear()
 
-    conexao.commit()
-    conexao.close()
+
+    if lote:
+        cursor.executemany("INSERT INTO empresa VALUES (?, ?, ?, ?, ?, ?, ?)", lote)
+        conexao.commit()
 
     duracao = time.perf_counter() - inicio
     print(f"{total} linhas em {duracao}")
