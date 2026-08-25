@@ -17,4 +17,4 @@ if __name__ == "__main__":
     empresas = ler_empresas(caminho_csv)
     total = gravar_empresas(conexao, empresas)
     duracao = time.perf_counter() - inicio
-    print(f"{total} linhas em {duracao}")
+    print(f"{total} linhas em {duracao:.3f}")

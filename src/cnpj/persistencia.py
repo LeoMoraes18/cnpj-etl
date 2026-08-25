@@ -12,7 +12,7 @@ def gravar_empresas(conexao, empresas, tamanho_lote: int = 10_000) -> int:
             empresa.razao_social,
             empresa.natureza_juridica,
             empresa.qualificacao_responsavel,
-            str(empresa.capital_social),
+            int(empresa.capital_social * 100),
             empresa.porte,
             empresa.ente_federativo,
         ))
