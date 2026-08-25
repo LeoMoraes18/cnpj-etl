@@ -11,7 +11,7 @@ cursor.execute("""
         qualificacao_responsavel TEXT,
         capital_social TEXT,
         porte TEXT,
-        ente_federativa TEXT
+        ente_federativo TEXT
     )
 """)
 
