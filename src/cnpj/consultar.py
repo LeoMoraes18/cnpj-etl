@@ -1,5 +1,10 @@
+import sqlite3
 
-def buscar_empresas(conexao, natureza=None, capital_min=None, limite=10):
+def buscar_empresas(
+        conexao: sqlite3.Connection,
+        natureza: str | None = None,
+        capital_min: int | None = None,
+        limite: int = 10) -> list[tuple[str, str, int]]:
     """Consultar empresas com filtros opcionais. Devolve lista de tuplas."""
 
     condicoes = []
@@ -11,7 +16,7 @@ def buscar_empresas(conexao, natureza=None, capital_min=None, limite=10):
 
     if capital_min is not None:
         condicoes.append("capital_social >= ?")
-        valores.append(capital_min * 100)
+        valores.append(str(capital_min * 100))
 
     sql = "SELECT cnpj_basico, razao_social, capital_social FROM empresa"
 
@@ -19,6 +24,6 @@ def buscar_empresas(conexao, natureza=None, capital_min=None, limite=10):
         sql += " WHERE " + " AND ".join(condicoes)
 
     sql += " LIMIT ?"
-    valores.append(limite)
+    valores.append(str(limite))
 
     return conexao.execute(sql, valores).fetchall()
