@@ -3,7 +3,18 @@ import csv
 from decimal import Decimal
 import time
 import os
+from dataclasses import dataclass
 
+
+@dataclass(slots=True)
+class Empresa:
+    cnpj_basico: str
+    razao_social: str
+    natureza_juridica: str
+    qualificacao_responsavel: str
+    capital_social: Decimal
+    porte: str
+    ente_federativo: str
 
 COLUNAS = (
     "cnpj_basico",
@@ -31,10 +42,10 @@ def ler_empresas(caminho_csv: str):
         for campos in leitor:
             registro = dict(zip(COLUNAS, campos))
             registro["capital_social"] = Decimal(registro["capital_social"].replace(",", "."))
-            yield registro
+            yield Empresa(**registro)
 
 
-caminho_csv, extraiu = obter_csv("data/zips/Empresas1.zip", "data/csv")
+caminho_csv, extraiu = obter_csv("data/zips/Empresas0.zip", "data/csv")
 
 if extraiu:
     print("extraído")
