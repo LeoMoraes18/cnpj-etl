@@ -14,7 +14,7 @@ p_carregar.add_argument("--zip", required=True)
 
 p_buscar = sub.add_parser("buscar", help="consulta empresas no banco")
 p_buscar.add_argument("--natureza")
-p_buscar.add_argument("--capital_min", type=int)
+p_buscar.add_argument("--capital-min", type=int)
 p_buscar.add_argument("--limite", type=int, default=10)
 
 
