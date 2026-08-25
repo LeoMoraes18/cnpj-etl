@@ -6,7 +6,13 @@ dist/
 wheels/
 *.egg-info
 
-data/
+data/*
+!data/.gitkeep
 
 # Virtual environments
 .venv
+
+
+*.db
+*.db-journal
+*.db-wal
