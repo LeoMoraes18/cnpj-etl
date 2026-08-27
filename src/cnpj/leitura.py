@@ -1,7 +1,8 @@
 from decimal import Decimal
 import csv
 
-from cnpj.modelo import Empresa, COLUNAS
+from cnpj.modelo import Empresa
+from cnpj.layout import ENCODING, DELIMITADOR
 
 
 def para_decimal(valor: str) -> Decimal | None:
@@ -11,9 +12,7 @@ def para_decimal(valor: str) -> Decimal | None:
     return Decimal(valor.replace(",", "."))
 
 def ler_empresas(caminho_csv: str):
-    with open(caminho_csv, encoding="latin-1") as f:
-        leitor = csv.reader(f, delimiter=";")
-        for campos in leitor:
-            registro = dict(zip(COLUNAS, campos))
-            registro["capital_social"] = para_decimal(registro["capital_social"])
-            yield Empresa(**registro)
+    with open(caminho_csv, encoding=ENCODING) as f:
+        for campos in csv.reader(f, delimiter=DELIMITADOR):
+            cnpj, razao, natureza, qualificacao, capital, porte, ente = campos
+            yield Empresa(cnpj, razao, natureza, qualificacao, para_decimal(capital), porte, ente)
