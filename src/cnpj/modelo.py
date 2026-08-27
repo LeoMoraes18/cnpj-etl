@@ -7,10 +7,10 @@ class Empresa:
     razao_social: str
     natureza_juridica: str
     qualificacao_responsavel: str
-    capital_social: Decimal
+    capital_social: Decimal | None
     porte: str
     ente_federativo: str
-    
+
 
 COLUNAS = (
     "cnpj_basico",
