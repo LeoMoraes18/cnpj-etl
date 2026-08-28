@@ -9,8 +9,8 @@ def gravar_empresas(conexao: sqlite3.Connection, empresas: Iterable[Empresa], ta
 
     cursor = conexao.cursor()
 
-    lote = []
-    total = 0
+    lote: list[tuple] = []
+    total: int = 0
 
     for empresa in empresas:
         lote.append(empresa.para_linha())
