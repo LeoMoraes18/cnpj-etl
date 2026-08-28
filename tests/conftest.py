@@ -1,7 +1,7 @@
 import sqlite3
 import pytest
 
-from cnpj.schema import criar_tabelas
+from cnpj.esquema import criar_tabelas
 
 @pytest.fixture
 def conexao():

@@ -1,8 +1,8 @@
 import sqlite3
 
+from cnpj.esquema import criar_tabelas
 
-from cnpj.schema import criar_tabelas
-
-conexao = sqlite3.connect("data/cnpj.db")
-criar_tabelas(conexao)
-conexao.close()
+if __name__ == '__main__':
+    conexao = sqlite3.connect("data/cnpj.db")
+    criar_tabelas(conexao)
+    conexao.close()
